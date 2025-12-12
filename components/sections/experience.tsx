@@ -56,11 +56,11 @@ export function ExperienceSection() {
       {experiences.map((exp, idx) => (
         <div key={idx} className="pl-2 space-y-2">
           <div>
-            <div className="text-[#cdd6f4] flex items-start justify-between">
-              <span className="text-[#a6e3a1]">[{idx + 1}]</span>
+            <div className="text-foreground flex items-start justify-between">
+              <span className="text-(--terminal-green)">[{idx + 1}]</span>
               <div className="flex-1 pl-3">
                 <div className="font-bold">{exp.role}</div>
-                <div className="text-[#a6adc8]">
+                <div className="text-muted-foreground">
                   {exp.company} • {exp.period}
                 </div>
               </div>
@@ -68,8 +68,8 @@ export function ExperienceSection() {
           </div>
           <div className="pl-7 space-y-1">
             {exp.description.map((desc, i) => (
-              <div key={i} className="text-[#a6adc8] flex gap-2">
-                <span className="text-[#7f849c]">•</span>
+              <div key={i} className="text-muted-foreground flex gap-2">
+                <span className="text-(--ctp-overlay1)">•</span>
                 <span>{desc}</span>
               </div>
             ))}

@@ -1,8 +1,7 @@
 "use client";
 
+import { useCallback, useEffect, useRef, useState } from "react";
 import type React from "react";
-
-import { useState, useEffect, useRef, useCallback } from "react";
 
 import { AboutSection } from "./sections/about";
 import { ContactSection } from "./sections/contact";
@@ -81,7 +80,7 @@ export function Terminal() {
         break;
       default:
         output = (
-          <div className="text-[#f38ba8] text-sm">
+          <div className="text-(--terminal-red) text-sm">
             command not found. Type 'help' for available commands.
           </div>
         );
@@ -128,12 +127,12 @@ export function Terminal() {
   };
 
   return (
-    <div className="border border-[#45475a] rounded-md bg-[#1e1e2e] flex-1 overflow-y-auto p-4 sm:p-6">
+    <div className="border border-border rounded-md bg-background flex-1 overflow-y-auto p-4 sm:p-6">
       <div className="space-y-4">
         {history.map((entry) => (
           <div key={entry.id} className="space-y-2">
-            <div className="text-[#cdd6f4] text-sm">
-              <span className="text-[#a6e3a1]">$ </span>
+            <div className="text-foreground text-sm">
+              <span className="text-(--terminal-green)">$ </span>
               {entry.command}
             </div>
             {entry.output}
@@ -141,12 +140,12 @@ export function Terminal() {
         ))}
 
         <form onSubmit={handleSubmit} className="flex items-center gap-2">
-          <span className="text-[#a6e3a1]">$</span>
+          <span className="text-(--terminal-green)">$</span>
           <input
             type="text"
             value={input}
             onChange={(e) => setInput(e.target.value)}
-            className="flex-1 bg-transparent outline-none text-[#cdd6f4] font-mono text-sm caret-[#a6e3a1]"
+            className="flex-1 bg-transparent outline-none text-foreground font-mono text-sm caret-(--terminal-green)"
             placeholder="Type a command... (try 'help')"
             autoFocus
           />
@@ -168,15 +167,15 @@ const ASCII_ART = [
 
 function WelcomeSection() {
   return (
-    <div className="space-y-4 text-sm text-[#cdd6f4]">
-      <pre className="text-[#89b4fa] text-[10px] leading-tight overflow-x-auto">
+    <div className="space-y-4 text-sm text-foreground">
+      <pre className="text-(--terminal-blue) text-[10px] leading-tight overflow-x-auto">
         {ASCII_ART}
       </pre>
-      <div className="border-l-2 border-[#89b4fa] pl-4 space-y-2">
-        <p className="text-[#cdd6f4]">Explore my portfolio and experience!</p>
-        <p className="text-[#a6adc8]">
-          Type <span className="text-[#a6e3a1]">'help'</span> to see available
-          commands.
+      <div className="border-l-2 border-(--terminal-blue) pl-4 space-y-2">
+        <p className="text-foreground">Explore my portfolio and experience!</p>
+        <p className="text-muted-foreground">
+          Type <span className="text-(--terminal-green)">'help'</span> to see
+          available commands.
         </p>
       </div>
     </div>
@@ -186,7 +185,7 @@ function WelcomeSection() {
 function HelpSection({ onCommand }: { onCommand: (cmd: string) => void }) {
   return (
     <div className="space-y-2 text-sm">
-      <div className="text-[#cdd6f4] border-b border-[#45475a] pb-2 mb-3">
+      <div className="text-foreground border-b border-border pb-2 mb-3">
         Available Commands:
       </div>
       {commands.map((cmd) => (
@@ -198,12 +197,12 @@ function HelpSection({ onCommand }: { onCommand: (cmd: string) => void }) {
             e.stopPropagation();
             onCommand(cmd.cmd);
           }}
-          className="flex w-full items-center gap-4 text-left text-[#bac2de] hover:text-[#f9e2af] transition-colors cursor-pointer"
+          className="flex w-full items-center gap-4 text-left text-(--ctp-subtext1) hover:text-(--terminal-yellow) transition-colors cursor-pointer"
         >
-          <span className="text-[#a6e3a1] w-24 underline decoration-dotted">
+          <span className="text-(--terminal-green) w-24 underline decoration-dotted">
             {cmd.cmd}
           </span>
-          <span className="text-[#6c7086]">—</span>
+          <span className="text-(--ctp-overlay0)">—</span>
           <span>{cmd.desc}</span>
         </button>
       ))}

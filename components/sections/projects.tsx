@@ -33,13 +33,15 @@ export function ProjectsSection() {
       <SectionHeader title="PROJECTS" />
       {projects.map((project, idx) => (
         <div key={idx} className="pl-2 space-y-1">
-          <div className="text-[#cdd6f4]">
-            <span className="text-[#a6e3a1]">[{idx + 1}]</span>
+          <div className="text-foreground">
+            <span className="text-(--terminal-green)">[{idx + 1}]</span>
             <span className="pl-3 font-bold">{project.name}</span>
           </div>
           <div className="pl-7 space-y-1">
-            <div className="text-[#a6adc8]">{project.description}</div>
-            <div className="text-[#7f849c] text-xs">TECH: {project.tech}</div>
+            <div className="text-muted-foreground">{project.description}</div>
+            <div className="text-(--ctp-overlay1) text-xs">
+              TECH: {project.tech}
+            </div>
           </div>
         </div>
       ))}

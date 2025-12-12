@@ -1,6 +1,10 @@
-import type React from "react";
 import type { Metadata } from "next";
 import { Analytics } from "@vercel/analytics/next";
+import type React from "react";
+
+import { ThemeProvider } from "@/components/theme/theme-provider";
+import { ThemeScript } from "@/components/theme/theme-script";
+
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -17,9 +21,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={`font-mono antialiased`}>
-        {children}
+    <html lang="en" data-theme="mocha">
+      <head>
+        <ThemeScript />
+      </head>
+      <body className="font-mono antialiased">
+        <ThemeProvider>{children}</ThemeProvider>
         <Analytics />
       </body>
     </html>

@@ -59,12 +59,12 @@ export function SkillsSection() {
       <div className="pl-2 space-y-4">
         {skillCategories.map((cat, idx) => (
           <div key={idx}>
-            <div className="text-[#a6e3a1] mb-2">{cat.category}:</div>
+            <div className="text-(--terminal-green) mb-2">{cat.category}:</div>
             <div className="pl-4 flex flex-wrap gap-2">
               {cat.skills.map((skill, i) => (
                 <span
                   key={i}
-                  className="text-[#cdd6f4] border border-[#45475a] bg-[#313244] px-2 py-1 text-xs rounded-sm"
+                  className="text-foreground border border-border bg-secondary px-2 py-1 text-xs rounded-sm"
                 >
                   {skill}
                 </span>

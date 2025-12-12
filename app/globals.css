@@ -4,7 +4,10 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  /* Catppuccin Mocha Color Palette */
+  /*
+   * Catppuccin default flavor: Mocha
+   * (Overridden via html[data-theme="..."] below)
+   */
   --ctp-rosewater: #f5e0dc;
   --ctp-flamingo: #f2cdcd;
   --ctp-pink: #f5c2e7;
@@ -32,47 +35,134 @@
   --ctp-mantle: #181825;
   --ctp-crust: #11111b;
 
-  /* Theme Variables using Catppuccin Mocha */
-  --background: #1e1e2e;
-  --foreground: #cdd6f4;
-  --card: #181825;
-  --card-foreground: #cdd6f4;
-  --popover: #181825;
-  --popover-foreground: #cdd6f4;
-  --primary: #89b4fa;
-  --primary-foreground: #1e1e2e;
-  --secondary: #313244;
-  --secondary-foreground: #cdd6f4;
-  --muted: #313244;
-  --muted-foreground: #a6adc8;
-  --accent: #313244;
-  --accent-foreground: #cdd6f4;
-  --destructive: #f38ba8;
-  --destructive-foreground: #cdd6f4;
-  --border: #45475a;
-  --input: #45475a;
-  --ring: #89b4fa;
-  --chart-1: #89b4fa;
-  --chart-2: #cba6f7;
-  --chart-3: #a6e3a1;
-  --chart-4: #fab387;
-  --chart-5: #f5c2e7;
+  /* Theme variables (derived from current Catppuccin flavor) */
+  --background: var(--ctp-base);
+  --foreground: var(--ctp-text);
+  --card: var(--ctp-mantle);
+  --card-foreground: var(--ctp-text);
+  --popover: var(--ctp-mantle);
+  --popover-foreground: var(--ctp-text);
+  --primary: var(--ctp-blue);
+  --primary-foreground: var(--ctp-base);
+  --secondary: var(--ctp-surface0);
+  --secondary-foreground: var(--ctp-text);
+  --muted: var(--ctp-surface0);
+  --muted-foreground: var(--ctp-subtext0);
+  --accent: var(--ctp-surface0);
+  --accent-foreground: var(--ctp-text);
+  --destructive: var(--ctp-red);
+  --destructive-foreground: var(--ctp-text);
+  --border: var(--ctp-surface1);
+  --input: var(--ctp-surface1);
+  --ring: var(--ctp-blue);
+  --chart-1: var(--ctp-blue);
+  --chart-2: var(--ctp-mauve);
+  --chart-3: var(--ctp-green);
+  --chart-4: var(--ctp-peach);
+  --chart-5: var(--ctp-pink);
   --radius: 0.375rem;
-  --sidebar: #181825;
-  --sidebar-foreground: #cdd6f4;
-  --sidebar-primary: #89b4fa;
-  --sidebar-primary-foreground: #1e1e2e;
-  --sidebar-accent: #313244;
-  --sidebar-accent-foreground: #cdd6f4;
-  --sidebar-border: #45475a;
-  --sidebar-ring: #89b4fa;
-  
-  /* Terminal-specific colors */
-  --terminal-green: #a6e3a1;
-  --terminal-red: #f38ba8;
-  --terminal-blue: #89b4fa;
-  --terminal-yellow: #f9e2af;
-  --terminal-purple: #cba6f7;
+  --sidebar: var(--ctp-mantle);
+  --sidebar-foreground: var(--ctp-text);
+  --sidebar-primary: var(--ctp-blue);
+  --sidebar-primary-foreground: var(--ctp-base);
+  --sidebar-accent: var(--ctp-surface0);
+  --sidebar-accent-foreground: var(--ctp-text);
+  --sidebar-border: var(--ctp-surface1);
+  --sidebar-ring: var(--ctp-blue);
+
+  /* Terminal-specific semantic colors */
+  --terminal-green: var(--ctp-green);
+  --terminal-red: var(--ctp-red);
+  --terminal-blue: var(--ctp-blue);
+  --terminal-yellow: var(--ctp-yellow);
+  --terminal-purple: var(--ctp-mauve);
+}
+
+html[data-theme="latte"] {
+  --ctp-rosewater: #dc8a78;
+  --ctp-flamingo: #dd7878;
+  --ctp-pink: #ea76cb;
+  --ctp-mauve: #8839ef;
+  --ctp-red: #d20f39;
+  --ctp-maroon: #e64553;
+  --ctp-peach: #fe640b;
+  --ctp-yellow: #df8e1d;
+  --ctp-green: #40a02b;
+  --ctp-teal: #179299;
+  --ctp-sky: #04a5e5;
+  --ctp-sapphire: #209fb5;
+  --ctp-blue: #1e66f5;
+  --ctp-lavender: #7287fd;
+  --ctp-text: #4c4f69;
+  --ctp-subtext1: #5c5f77;
+  --ctp-subtext0: #6c6f85;
+  --ctp-overlay2: #7c7f93;
+  --ctp-overlay1: #8c8fa1;
+  --ctp-overlay0: #9ca0b0;
+  --ctp-surface2: #acb0be;
+  --ctp-surface1: #bcc0cc;
+  --ctp-surface0: #ccd0da;
+  --ctp-base: #eff1f5;
+  --ctp-mantle: #e6e9ef;
+  --ctp-crust: #dce0e8;
+}
+
+html[data-theme="frappe"] {
+  --ctp-rosewater: #f2d5cf;
+  --ctp-flamingo: #eebebe;
+  --ctp-pink: #f4b8e4;
+  --ctp-mauve: #ca9ee6;
+  --ctp-red: #e78284;
+  --ctp-maroon: #ea999c;
+  --ctp-peach: #ef9f76;
+  --ctp-yellow: #e5c890;
+  --ctp-green: #a6d189;
+  --ctp-teal: #81c8be;
+  --ctp-sky: #99d1db;
+  --ctp-sapphire: #85c1dc;
+  --ctp-blue: #8caaee;
+  --ctp-lavender: #babbf1;
+  --ctp-text: #c6d0f5;
+  --ctp-subtext1: #b5bfe2;
+  --ctp-subtext0: #a5adce;
+  --ctp-overlay2: #949cbb;
+  --ctp-overlay1: #838ba7;
+  --ctp-overlay0: #737994;
+  --ctp-surface2: #626880;
+  --ctp-surface1: #51576d;
+  --ctp-surface0: #414559;
+  --ctp-base: #303446;
+  --ctp-mantle: #292c3c;
+  --ctp-crust: #232634;
+}
+
+html[data-theme="macchiato"] {
+  --ctp-rosewater: #f4dbd6;
+  --ctp-flamingo: #f0c6c6;
+  --ctp-pink: #f5bde6;
+  --ctp-mauve: #c6a0f6;
+  --ctp-red: #ed8796;
+  --ctp-maroon: #ee99a0;
+  --ctp-peach: #f5a97f;
+  --ctp-yellow: #eed49f;
+  --ctp-green: #a6da95;
+  --ctp-teal: #8bd5ca;
+  --ctp-sky: #91d7e3;
+  --ctp-sapphire: #7dc4e4;
+  --ctp-blue: #8aadf4;
+  --ctp-lavender: #b7bdf8;
+  --ctp-text: #cad3f5;
+  --ctp-subtext1: #b8c0e0;
+  --ctp-subtext0: #a5adcb;
+  --ctp-overlay2: #939ab7;
+  --ctp-overlay1: #8087a2;
+  --ctp-overlay0: #6e738d;
+  --ctp-surface2: #5b6078;
+  --ctp-surface1: #494d64;
+  --ctp-surface0: #363a4f;
+  --ctp-base: #24273a;
+  --ctp-mantle: #1e2030;
+  --ctp-crust: #181926;
 }
 
 @theme inline {
