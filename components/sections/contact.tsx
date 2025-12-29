@@ -1,5 +1,6 @@
+import { Github, Globe, Linkedin, Mail } from "lucide-react";
+
 import { SectionFooter, SectionHeader } from "./section-wrapper";
-import { ExternalLink, Mail, Github, Linkedin, Globe } from "lucide-react";
 
 const contactItems = [
   {

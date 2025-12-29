@@ -1,25 +1,16 @@
 "use client";
 
-import { useCallback, useEffect, useRef, useState } from "react";
 import type React from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 
 import { AboutSection } from "./sections/about";
 import { ContactSection } from "./sections/contact";
 import { EducationSection } from "./sections/education";
 import { ExperienceSection } from "./sections/experience";
+import { HelpSection } from "./sections/help";
 import { ProjectsSection } from "./sections/projects";
 import { SkillsSection } from "./sections/skills";
-
-const commands = [
-  { cmd: "about", desc: "Display personal information" },
-  { cmd: "experience", desc: "Show work experience" },
-  { cmd: "education", desc: "Show education history" },
-  { cmd: "skills", desc: "List technical skills" },
-  { cmd: "projects", desc: "Display notable projects" },
-  { cmd: "contact", desc: "Show contact information" },
-  { cmd: "help", desc: "Show available commands" },
-  { cmd: "clear", desc: "Clear the terminal" },
-];
+import { WelcomeSection } from "./sections/welcome";
 
 type HistoryEntry = {
   id: number;
@@ -152,60 +143,6 @@ export function Terminal() {
         </form>
         <div ref={bottomRef} />
       </div>
-    </div>
-  );
-}
-
-const ASCII_ART = [
-  "████████╗██╗███╗   ███╗ ██████╗ ████████╗██╗  ██╗██╗   ██╗     ██████╗██╗  ██╗██╗███╗   ██╗",
-  "╚══██╔══╝██║████╗ ████║██╔═══██╗╚══██╔══╝██║  ██║╚██╗ ██╔╝    ██╔════╝██║  ██║██║████╗  ██║",
-  "   ██║   ██║██╔████╔██║██║   ██║   ██║   ███████║ ╚████╔╝     ██║     ███████║██║██╔██╗ ██║",
-  "   ██║   ██║██║╚██╔╝██║██║   ██║   ██║   ██╔══██║  ╚██╔╝      ██║     ██╔══██║██║██║╚██╗██║",
-  "   ██║   ██║██║ ╚═╝ ██║╚██████╔╝   ██║   ██║  ██║   ██║       ╚██████╗██║  ██║██║██║ ╚████║",
-  "   ╚═╝   ╚═╝╚═╝     ╚═╝ ╚═════╝    ╚═╝   ╚═╝  ╚═╝   ╚═╝        ╚═════╝╚═╝  ╚═╝╚═╝╚═╝  ╚═══╝",
-].join("\n");
-
-function WelcomeSection() {
-  return (
-    <div className="space-y-4 text-sm text-foreground">
-      <pre className="text-(--terminal-blue) text-[10px] leading-tight overflow-x-auto">
-        {ASCII_ART}
-      </pre>
-      <div className="border-l-2 border-(--terminal-blue) pl-4 space-y-2">
-        <p className="text-foreground">Explore my portfolio and experience!</p>
-        <p className="text-muted-foreground">
-          Type <span className="text-(--terminal-green)">'help'</span> to see
-          available commands.
-        </p>
-      </div>
-    </div>
-  );
-}
-
-function HelpSection({ onCommand }: { onCommand: (cmd: string) => void }) {
-  return (
-    <div className="space-y-2 text-sm">
-      <div className="text-foreground border-b border-border pb-2 mb-3">
-        Available Commands:
-      </div>
-      {commands.map((cmd) => (
-        <button
-          key={cmd.cmd}
-          type="button"
-          onClick={(e) => {
-            e.preventDefault();
-            e.stopPropagation();
-            onCommand(cmd.cmd);
-          }}
-          className="flex w-full items-center gap-4 text-left text-(--ctp-subtext1) hover:text-(--terminal-yellow) transition-colors cursor-pointer"
-        >
-          <span className="text-(--terminal-green) w-24 underline decoration-dotted">
-            {cmd.cmd}
-          </span>
-          <span className="text-(--ctp-overlay0)">—</span>
-          <span>{cmd.desc}</span>
-        </button>
-      ))}
     </div>
   );
 }
