@@ -21,6 +21,9 @@ type HistoryEntry = {
 export function Terminal() {
   const [history, setHistory] = useState<HistoryEntry[]>([]);
   const [input, setInput] = useState("");
+  const [commandHistory, setCommandHistory] = useState<string[]>([]);
+  const [historyIndex, setHistoryIndex] = useState(-1);
+  const [tempInput, setTempInput] = useState("");
   const bottomRef = useRef<HTMLDivElement>(null);
   const idCounter = useRef(0);
 
@@ -30,6 +33,9 @@ export function Terminal() {
     if (trimmedCmd === "clear") {
       setHistory([]);
       setInput("");
+      setCommandHistory([]);
+      setHistoryIndex(-1);
+      setTempInput("");
       return;
     }
 
@@ -43,6 +49,8 @@ export function Terminal() {
         },
       ]);
       setInput("");
+      setHistoryIndex(-1);
+      setTempInput("");
       return;
     }
 
@@ -86,7 +94,16 @@ export function Terminal() {
       },
     ]);
 
+    setCommandHistory((prev) => {
+      if (prev.length === 0 || prev[prev.length - 1] !== cmd) {
+        return [...prev, cmd];
+      }
+      return prev;
+    });
+
     setInput("");
+    setHistoryIndex(-1);
+    setTempInput("");
   }, []);
 
   useEffect(() => {
@@ -117,6 +134,50 @@ export function Terminal() {
     handleCommand(input);
   };
 
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.ctrlKey && e.key === "l") {
+      e.preventDefault();
+      handleCommand("clear");
+      return;
+    }
+
+    if (e.ctrlKey && e.key === "k") {
+      e.preventDefault();
+      handleCommand("help");
+      return;
+    }
+
+    if (e.key === "ArrowUp") {
+      e.preventDefault();
+      if (commandHistory.length === 0) return;
+
+      const newIndex =
+        historyIndex === -1
+          ? commandHistory.length - 1
+          : Math.max(0, historyIndex - 1);
+
+      if (historyIndex === -1) {
+        setTempInput(input);
+      }
+
+      setHistoryIndex(newIndex);
+      setInput(commandHistory[newIndex]);
+    } else if (e.key === "ArrowDown") {
+      e.preventDefault();
+      if (historyIndex === -1) return;
+
+      const newIndex = historyIndex + 1;
+
+      if (newIndex >= commandHistory.length) {
+        setHistoryIndex(-1);
+        setInput(tempInput);
+      } else {
+        setHistoryIndex(newIndex);
+        setInput(commandHistory[newIndex]);
+      }
+    }
+  };
+
   return (
     <div className="border border-border rounded-md bg-background flex-1 overflow-y-auto p-4 sm:p-6">
       <div className="space-y-4">
@@ -136,6 +197,7 @@ export function Terminal() {
             type="text"
             value={input}
             onChange={(e) => setInput(e.target.value)}
+            onKeyDown={handleKeyDown}
             className="flex-1 bg-transparent outline-none text-foreground font-mono text-sm caret-(--terminal-green)"
             placeholder="Type a command... (try 'help')"
             autoFocus
